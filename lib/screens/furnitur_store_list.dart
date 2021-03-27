@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/provider/grocery_provider.dart';
-import 'package:grocery_store/screens/grocery_store_details.dart';
-import 'package:grocery_store/main.dart';
-import 'package:grocery_store/utils/Colors.dart';
-import 'package:grocery_store/widgets/staggered_dual_view.dart';
+import 'package:furniturin/main.dart';
+import 'package:furniturin/provider/furnitur_provider.dart';
+import 'package:furniturin/screens/furnitur_store_details.dart';
+import 'package:furniturin/utils/Colors.dart';
+import 'package:furniturin/widgets/staggered_dual_view.dart';
 
-class GroceryStoreList extends StatelessWidget {
+class FurniturStoreList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final bloc = GroceryProvider.of(context).bloc;
+    final bloc = FurniturProvider.of(context).bloc;
     return Container(
       color: backgroundColor,
       padding: const EdgeInsets.only(top: cartBarHeight, left: 10, right: 10),
@@ -26,7 +26,7 @@ class GroceryStoreList extends StatelessWidget {
                   pageBuilder: (context, animation, __) {
                     return FadeTransition(
                       opacity: animation,
-                      child: GroceryStoreDetails(
+                      child: FurniturStoreDetails(
                         product: product,
                         onProductAdded: (){
                           bloc.addProduct(product);
@@ -67,7 +67,7 @@ class GroceryStoreList extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-                        fontSize: 19,
+                        fontSize: 14,
                       ),
                     ),
                     SizedBox(
@@ -77,14 +77,14 @@ class GroceryStoreList extends StatelessWidget {
                       product.name,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 15,
+                        fontSize: 12,
                       ),
                     ),
                     Text(
-                      product.weight,
+                      product.left,
                       style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 15,
+                        fontSize: 10,
                       ),
                     ),
                   ],

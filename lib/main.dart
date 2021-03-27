@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/provider/grocery_provider.dart';
-import 'package:grocery_store/bloc/furnitur_store_bloc.dart';
-import 'package:grocery_store/screens/grocery_store_cart.dart';
-import 'package:grocery_store/screens/grocery_store_list.dart';
-import 'package:grocery_store/utils/Colors.dart';
+import 'package:furniturin/bloc/furnitur_store_bloc.dart';
+import 'package:furniturin/provider/furnitur_provider.dart';
+import 'package:furniturin/screens/furnitur_store_cart.dart';
+import 'package:furniturin/screens/furnitur_store_list.dart';
+import 'package:furniturin/utils/Colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Aplikasi Pasar',
+      title: 'Furniturin Store',
       color: Colors.red,
       debugShowCheckedModeBanner: false,
       home: GroceryStoreHome(),
@@ -30,7 +30,7 @@ class GroceryStoreHome extends StatefulWidget {
 }
 
 class _GroceryStoreHomeState extends State<GroceryStoreHome> {
-  final bloc = GroceryStoreBloc();
+  final bloc = FurniturStoreBloc();
 
   void _onVerticalGesture(DragUpdateDetails details) {
     if (details.primaryDelta < -7) {
@@ -40,28 +40,28 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
     }
   }
 
-  double _getTopForWhitePanel(GroceryState state, Size size) {
-    if (state == GroceryState.normal) {
+  double _getTopForWhitePanel(FurniturState state, Size size) {
+    if (state == FurniturState.normal) {
       return -cartBarHeight + kToolbarHeight;
-    } else if (state == GroceryState.cart) {
+    } else if (state == FurniturState.cart) {
       return -(size.height - kToolbarHeight - cartBarHeight / 2);
     }
     return 0.0;
   }
 
-  double _getTopForBlackPanel(GroceryState state, Size size) {
-    if (state == GroceryState.normal) {
+  double _getTopForBlackPanel(FurniturState state, Size size) {
+    if (state == FurniturState.normal) {
       return size.height - cartBarHeight;
-    } else if (state == GroceryState.cart) {
+    } else if (state == FurniturState.cart) {
       return cartBarHeight / 2;
     }
     return 0.0;
   }
 
-  double _getTopForAppBar(GroceryState state) {
-    if (state == GroceryState.normal) {
+  double _getTopForAppBar(FurniturState state) {
+    if (state == FurniturState.normal) {
       return 0.0;
-    } else if (state == GroceryState.cart) {
+    } else if (state == FurniturState.cart) {
       return -cartBarHeight;
     }
     return 0.0;
@@ -71,7 +71,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return GroceryProvider(
+    return FurniturProvider(
       bloc: bloc,
       child: AnimatedBuilder(
         animation: bloc,
@@ -85,7 +85,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                   duration: _panelTransition,
                   left: 0,
                   right: 0,
-                  top: _getTopForWhitePanel(bloc.groceryState, size),
+                  top: _getTopForWhitePanel(bloc.furniturState, size),
                   height: size.height - kToolbarHeight,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
@@ -96,7 +96,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                       ),
-                      child: GroceryStoreList(),
+                      child: FurniturStoreList(),
                     ),
                   ),
                 ),
@@ -105,7 +105,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                   duration: _panelTransition,
                   left: 0,
                   right: 0,
-                  top: _getTopForBlackPanel(bloc.groceryState, size),
+                  top: _getTopForBlackPanel(bloc.furniturState, size),
                   height: size.height - kToolbarHeight,
                   child: GestureDetector(
                     onVerticalDragUpdate: _onVerticalGesture,
@@ -119,7 +119,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                               duration: _panelTransition,
                               child: SizedBox(
                                 height: kToolbarHeight,
-                                child: bloc.groceryState == GroceryState.normal
+                                child: bloc.furniturState == FurniturState.normal
                                   ? Row(
                                       children: [
                                         Text(
@@ -194,7 +194,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                             ),
                           ),
                           Expanded(
-                            child: GroceryStoreCart(),
+                            child: FurniturStoreCart(),
                           ),
 
                         ],
@@ -205,7 +205,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                 AnimatedPositioned(
                   curve: Curves.decelerate,
                   duration: _panelTransition,
-                  top: _getTopForAppBar(bloc.groceryState),
+                  top: _getTopForAppBar(bloc.furniturState),
                   left: 0,
                   right: 0,
                   child: _AppBarGrocery(),
@@ -238,7 +238,7 @@ class _AppBarGrocery extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                "Buah dan Sayur",
+                "Furniturin",
                 style: TextStyle(color: Colors.black),
               ),
             ),

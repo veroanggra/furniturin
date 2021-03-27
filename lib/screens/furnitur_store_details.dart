@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_store/models/furnitur_products.dart';
+import 'package:furniturin/models/furnitur_products.dart';
 
-class GroceryStoreDetails extends StatefulWidget {
-  const GroceryStoreDetails(
+class FurniturStoreDetails extends StatefulWidget {
+  const FurniturStoreDetails(
       {Key key, @required this.product, this.onProductAdded})
       : super(key: key);
-  final GroceryProduct product;
+  final FurniturProduct product;
   final VoidCallback onProductAdded;
 
   @override
-  _GroceryStoreDetailsState createState() => _GroceryStoreDetailsState();
+  _FurniturStoreDetailsState createState() => _FurniturStoreDetailsState();
 }
 
-class _GroceryStoreDetailsState extends State<GroceryStoreDetails> {
+class _FurniturStoreDetailsState extends State<FurniturStoreDetails> {
   String heroTag = '';
 
   void _addToCart(BuildContext context) {
@@ -62,7 +62,7 @@ class _GroceryStoreDetailsState extends State<GroceryStoreDetails> {
                     ),
                     const SizedBox(height: 15),
                     Text(
-                      widget.product.weight,
+                      widget.product.left,
                       style: Theme.of(context).textTheme.subtitle1.copyWith(
                             color: Colors.grey,
                             fontWeight: FontWeight.bold,

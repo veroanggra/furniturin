@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:furniturin/provider/grocery_provider.dart';
+import 'package:furniturin/provider/furnitur_provider.dart';
 
 class FurniturStoreCart extends StatelessWidget {
   @override
